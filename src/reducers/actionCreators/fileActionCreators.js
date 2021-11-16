@@ -10,7 +10,6 @@ import {
     CHANGE_PER_PAGE,
     CHANGE_CURRENT_PAGE,
     DELETE_BY_ID, SET_ACTIVE_CHECK_BOX, RESET_CURRENT_PAGE,
-    CHECKED_BY_ID
 } from '../actionTypes'
 
 
@@ -49,9 +48,6 @@ export const changeByPrice = (changeOptions) => ({
 export const deleteById = (id) => ({
     type: DELETE_BY_ID, payload: {id}
 });
-export const checkedById = (id) => ({
-    type: CHECKED_BY_ID, payload: {id}
-});
 
 export const changePerPage = (changeOptions) => ({
     type: CHANGE_PER_PAGE, payload: {changeOptions}
@@ -64,6 +60,6 @@ export const setTotalCompanies = (changeOptions) => ({
 export const changeCurrentPage = (changeOptions) => ({
     type: CHANGE_CURRENT_PAGE, payload: {changeOptions}
 });
-export const resetCurrentPage = (id) => ({
-    type: RESET_CURRENT_PAGE, payload:{id}
+export const resetCurrentPage = () => ({
+    type: RESET_CURRENT_PAGE
 });

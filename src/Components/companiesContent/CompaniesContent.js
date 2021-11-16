@@ -1,19 +1,11 @@
 import CompanyContent from "./companieContent/CompanyContent";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {setCompany} from "../../reducers/actionCreators/fileActionCreators";
-import Company from "../../services/CompanisJson"
+import {useSelector} from "react-redux";
+import {setTotalCompanies} from "../../reducers/actionCreators/fileActionCreators";
 import "./companiesContentStyle.scss"
 
 export default function CompaniesContent({setCompanyCount}) {
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(setCompany(Company))
-    }, [dispatch])
-
     const store = useSelector((store) => store);
+
 
     const {fileReducer, filterReducer} = store;
 
@@ -37,7 +29,6 @@ export default function CompaniesContent({setCompanyCount}) {
     companyInfo = companyInfo.filter(value => !(idDelete.includes(value.id)));
 
     companyInfo = companyInfo.filter(value => {
-
         switch (status) {
             case  'Danger': {
                 return value.status === 'Danger'
@@ -71,7 +62,10 @@ export default function CompaniesContent({setCompanyCount}) {
 
     companyInfo = (price === 'cheap') ? companyInfo.sort((a, b) => a.price.slice(1) - b.price.slice(1)) : (price === 'dear') ? companyInfo.sort((a, b) => b.price.slice(1) - a.price.slice(1)) : companyInfo;
 
-    setCompanyCount(companyInfo.length);
+    setTotalCompanies(companyInfo.length);
+
+
+    setCompanyCount(companyInfo.length)
 
     companyInfo = companyInfo.slice(currentPage * rowPerPage - rowPerPage, rowPerPage * currentPage);
 

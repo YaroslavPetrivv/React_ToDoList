@@ -13,6 +13,6 @@ export default function BottomTools({countCompanyPages}) {
     let pagesCount = Math.ceil(countCompanyPages / rowPerPage);
 
     return (
-        <BottomTool pagesCount={pagesCount} currentPage={currentPage} countRow={[5, 10, 15]}/>
+        <BottomTool pagesCount={pagesCount} currentPage={currentPage}  countRow={[5, 10, 15]}/>
     );
 }

@@ -1,6 +1,6 @@
 import "./bottomToolStyle.scss"
 import {useDispatch} from "react-redux";
-import {changeCurrentPage, changePerPage} from "../../../reducers/actionCreators/fileActionCreators";
+import {changeCurrentPage, changePerPage, resetCurrentPage} from "../../../reducers/actionCreators/fileActionCreators";
 
 
 export default function BottomTool({countRow, pagesCount, currentPage}) {
@@ -9,6 +9,7 @@ export default function BottomTool({countRow, pagesCount, currentPage}) {
 
     const changeRowPerPage = (e) => {
         dispatch(changePerPage(e.target.value))
+        dispatch(resetCurrentPage())
     }
 
     const removePagePagination = () => {

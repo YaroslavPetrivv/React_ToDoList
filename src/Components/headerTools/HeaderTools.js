@@ -84,7 +84,6 @@ export default function HeaderTools() {
     dispatch(changeByPrice(stateSelectPrice));
     dispatch(resetCurrentPage());
 
-
     return (
         <div className="headerTools">
             <CheckboxTool stateCheckbox={stateCheckbox} handleCheckbox={handleCheckbox}/>

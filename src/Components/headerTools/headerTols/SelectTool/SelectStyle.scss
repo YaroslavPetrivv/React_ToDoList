@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  justify-content: center;
 
   .headerTools__name {
     @include tableTitle
@@ -48,4 +49,6 @@ select {
   letter-spacing: 0.25px;
   color: #00072B;
   padding-right: 12px;
+  display: block;
+  margin: 0 auto;
 }

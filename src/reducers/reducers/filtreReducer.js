@@ -7,9 +7,10 @@ import {
     DELETE_BY_ID,
     FIND_BY_COMPANY,
     FIND_BY_CONTACT,
-    FIND_BY_SUY, RESET_CURRENT_PAGE, SET_ACTIVE_CHECK_BOX,
-    SET_TOTAL_COMPANIES,
-    CHECKED_BY_ID
+    FIND_BY_SUY,
+    RESET_CURRENT_PAGE,
+    SET_ACTIVE_CHECK_BOX,
+    SET_TOTAL_COMPANIES
 } from "../actionTypes";
 
 const initialState = {
@@ -20,7 +21,6 @@ const initialState = {
     type: 'All',
     price: 'All',
     isActiveCheckBox: false,
-    checkedID: [],
     idDelete: [],
     currentPage: 1,
     totalCompanies: 0,
@@ -100,12 +100,6 @@ export default function filterReducer(state = initialState, action) {
             return {
                 ...state,
                 currentPage: 1
-            }
-        }
-        case CHECKED_BY_ID : {
-            return {
-                ...state,
-                checkedID: [...state.checkedID, action.payload.id]
             }
         }
         default:

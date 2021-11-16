@@ -12,16 +12,16 @@ export default function CompanyContent({
                                            sku,
                                            contact: {img, name},
                                            price,
-                                           id,
-                                          active
+                                           id
                                        }) {
     const [menuFallingOutMenuState, setMenuFallingOutMenuState] = useState(false);
     const [checkBoxState, setCheckBoxState] = useState(false);
 
     const dispatch = useDispatch();
 
-
-
+    useEffect(() => {
+        dispatch(setCompany(Company))
+    }, [dispatch])
 
     const store = useSelector((store) => store);
 
@@ -33,11 +33,6 @@ export default function CompanyContent({
     const deleteItem = () => {
         setMenuFallingOutMenuState(!menuFallingOutMenuState);
         dispatch(deleteById(id))
-    }
-
-
-    const handleCheckBox = () => {
-
     }
 
     return (

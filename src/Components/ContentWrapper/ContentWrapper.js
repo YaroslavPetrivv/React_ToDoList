@@ -7,7 +7,6 @@ import {useDispatch} from "react-redux";
 import {setTotalCompanies} from "../../reducers/actionCreators/fileActionCreators";
 
 export default function ContentWrapper() {
-
     const [countCompanyPages, setCompanyCountPages] = useState(0);
     const dispatch = useDispatch();
 
