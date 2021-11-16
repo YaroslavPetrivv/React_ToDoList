@@ -1,0 +1,51 @@
+.bottomTools {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+
+
+  .bottomTools__pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .currentPage {
+      color: #304FFE;
+      padding: 5px 11px;
+      border: 1px solid #B0BAC9;
+
+    }
+
+    button {
+      width: 32px;
+      height: 32px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-color: transparent;
+      border: 1px solid #B0BAC9;
+
+    }
+
+  }
+
+  .bottomTools__NumberPages {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+
+    p {
+      color: #454D59;
+
+    }
+
+    select {
+      padding: 6px 21px;
+      background-position: 42px center;
+      border: 1px solid #B0BAC9;
+
+    }
+  }
+}

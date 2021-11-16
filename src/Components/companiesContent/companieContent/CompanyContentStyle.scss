@@ -1,0 +1,113 @@
+@import "src/HelperStyle/Mixins/mixins";
+
+.companyContent {
+  display: grid;
+  grid-template-columns: 48px 209px 119px 95px 142px 147px 193px 95px;
+  border-bottom: 1px solid #C9CFDA;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3px;
+  padding-bottom: 4px;
+  .companyContent:first-child{
+    padding-top: 0;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    color: #00072B;
+  }
+
+  .headerTools_CheckBox {
+
+  }
+
+  .companyContent__companyName, .companyContent_contact {
+    @include flexElementTable;
+  }
+
+  .companyContent_contact {
+    img {
+      border-radius: 50%;
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  .companyContent_price {
+    padding-left: 45%;
+  }
+
+  .companyContent__status {
+
+    .active {
+      color: #7FC008;
+      border: 1px solid #7FC008;
+
+    }
+
+    .danger {
+      color: #DB303F;
+      border: 1px solid #DB303F;
+    }
+
+    .pending {
+      color: #DB8C28;
+      border: 1px solid #DB8C28;
+
+    }
+
+    p {
+      display: inline-block;
+      padding: 0 11px;
+      border-radius: 4px;
+      text-transform: capitalize;
+      border: 1px solid #fff;
+    }
+  }
+
+  .companyContent_sku {
+    p {
+      display: inline-block;
+      padding: 1px 12px;
+      border: 1px solid #DFE2E9;
+      border-radius: 8px;
+    }
+  }
+
+  .companyContent_action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.4px;
+    cursor: pointer;
+    max-width: 35px;
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      background-color: #B0BAC9;
+      border-radius: 50%;
+    }
+  }
+
+  .fallingOutMenuHidden {
+    display: none;
+  }
+
+  .fallingOutMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    button {
+      background-color: #F1F1F1;
+      border-radius: 4px;
+      padding: 0 10px;
+    }
+  }
+
+
+}

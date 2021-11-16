@@ -1,0 +1,30 @@
+@import "./HelperStyle/reset.css";
+@import "HelperStyle/Variable/colors";
+
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: $BackgroundColor;
+  color: $ColorText;
+  font-size: 14px;
+  line-height: 20px;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#root{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+p{
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: $ColorText;
+}

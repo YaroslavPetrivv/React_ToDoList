@@ -1,0 +1,21 @@
+@import "./src/HelperStyle/Mixins/mixins";
+
+
+.headerTools_item {
+  .headerTools__name {
+
+    @include tableTitle
+  }
+
+  input {
+    color: #C9CFDA;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+  }
+
+  input::placeholder {
+    color: #C9CFDA;
+  }
+}
