@@ -543,7 +543,7 @@ const Company = [{
         price: "$452.85"
     }
     , {
-        id: 30,
+        id: 40,
         urlImg: '/img/companies.png',
         nameCompany: 'Louis Vuitton',
         status: 'Active',

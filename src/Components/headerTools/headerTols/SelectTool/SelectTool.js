@@ -25,7 +25,7 @@ export default function SelectTool({stateSelect, handleSelect, fieldName, status
                 <select onChange={handleSelect} value={stateSelect}
                         style={{backgroundImage: "url('img/ShapeDown.png')"}}>
                     {
-                        status.map(status => <option key={Math.random()*100}>{status}</option>)
+                        status.map(status => <option key={status}>{status}</option>)
                     }
                 </select>
             </div>

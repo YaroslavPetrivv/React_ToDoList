@@ -9,7 +9,7 @@ import {
     SET_TOTAL_COMPANIES,
     CHANGE_PER_PAGE,
     CHANGE_CURRENT_PAGE,
-    DELETE_BY_ID, SET_ACTIVE_CHECK_BOX, RESET_CURRENT_PAGE,
+    DELETE_BY_ID, SET_ACTIVE_CHECK_BOX, RESET_CURRENT_PAGE, CHECKED_ARRAY,
 } from '../actionTypes'
 
 
@@ -62,4 +62,7 @@ export const changeCurrentPage = (changeOptions) => ({
 });
 export const resetCurrentPage = () => ({
     type: RESET_CURRENT_PAGE
+});
+export const setCheckedArray = (id) => ({
+    type: CHECKED_ARRAY, payload: {id}
 });

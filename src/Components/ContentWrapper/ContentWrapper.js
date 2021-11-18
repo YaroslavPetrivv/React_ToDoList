@@ -15,7 +15,6 @@ export default function ContentWrapper() {
     }
     dispatch(setTotalCompanies(countCompanyPages));
 
-
     return (
         <div className="ContentWrapper">
             <HeaderTools/>

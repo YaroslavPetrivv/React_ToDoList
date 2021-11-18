@@ -1,4 +1,4 @@
-import {SET_COMPANY} from "../actionTypes";
+import { SET_COMPANY} from "../actionTypes";
 
 const initialState = {
     companyInfo: []

@@ -1,11 +1,10 @@
 import CompanyContent from "./companieContent/CompanyContent";
 import {useSelector} from "react-redux";
-import {setTotalCompanies} from "../../reducers/actionCreators/fileActionCreators";
 import "./companiesContentStyle.scss"
+import {useMemo} from "react";
 
 export default function CompaniesContent({setCompanyCount}) {
     const store = useSelector((store) => store);
-
 
     const {fileReducer, filterReducer} = store;
 
@@ -21,12 +20,25 @@ export default function CompaniesContent({setCompanyCount}) {
         idDelete,
         currentPage,
         rowPerPage,
+        isActiveCheckBox
     } = filterReducer;
 
-    companyInfo = companyInfo.filter(value => (value.nameCompany.includes(findByCompany)));
-    companyInfo = companyInfo.filter(value => (value.sku.toString().includes(findBySuy)));
-    companyInfo = companyInfo.filter(value => (value.contact.name.includes(findByContact)));
-    companyInfo = companyInfo.filter(value => !(idDelete.includes(value.id)));
+    companyInfo = useMemo(() => {
+        return companyInfo.filter(value => (value.nameCompany.includes(findByCompany)));
+    }, [companyInfo, findByCompany])
+
+    companyInfo = useMemo(() => {
+        return companyInfo.filter(value => (value.sku.toString().includes(findBySuy)));
+    }, [companyInfo, findBySuy])
+
+    companyInfo = useMemo(() => {
+        return companyInfo.filter(value => (value.contact.name.includes(findByContact)));
+    }, [companyInfo, findByContact])
+
+    companyInfo = useMemo(() => {
+        return companyInfo.filter(value => !(idDelete.includes(value.id)));
+    }, [companyInfo, idDelete])
+
 
     companyInfo = companyInfo.filter(value => {
         switch (status) {
@@ -60,19 +72,32 @@ export default function CompaniesContent({setCompanyCount}) {
         }
     });
 
-    companyInfo = (price === 'cheap') ? companyInfo.sort((a, b) => a.price.slice(1) - b.price.slice(1)) : (price === 'dear') ? companyInfo.sort((a, b) => b.price.slice(1) - a.price.slice(1)) : companyInfo;
+    companyInfo = useMemo(() => {
+        return (isActiveCheckBox) ? companyInfo.map(value => {
+            value.active = true;
+            return value
+        }) : companyInfo.map(value => {
+            value.active = false;
+            return value;
+        })
+    }, [isActiveCheckBox, companyInfo]);
 
-    setTotalCompanies(companyInfo.length);
+
+    companyInfo = useMemo(() => {
+        return (price === 'cheap') ? companyInfo.sort((a, b) => a.price.slice(1) - b.price.slice(1)) : (price === 'dear') ? companyInfo.sort((a, b) => b.price.slice(1) - a.price.slice(1)) : companyInfo;
+    }, [companyInfo, price])
 
 
-    setCompanyCount(companyInfo.length)
+    useMemo(() => {
+        setCompanyCount(companyInfo.length);
+    }, [setCompanyCount, companyInfo])
+
 
     companyInfo = companyInfo.slice(currentPage * rowPerPage - rowPerPage, rowPerPage * currentPage);
-
     return (
         <div className="companiesContent">
-            {
-                companyInfo.map(({urlImg, nameCompany, status, type, sku, contact, price, id}) =>
+            {companyInfo.length ?
+                companyInfo.map(({urlImg, nameCompany, status, type, sku, contact, price, id, active}) =>
                     <CompanyContent
                         key={id}
                         id={id}
@@ -83,7 +108,8 @@ export default function CompaniesContent({setCompanyCount}) {
                         sku={sku}
                         contact={contact}
                         price={price}
-                    />)
+                        active={active}
+                    />) : 'do not have information!'
             }
         </div>
     );

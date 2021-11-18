@@ -96,7 +96,8 @@ export default function filterReducer(state = initialState, action) {
                 ...state,
                 totalCompanies: action.payload.changeOptions,
             }
-        }        case RESET_CURRENT_PAGE : {
+        }
+        case RESET_CURRENT_PAGE : {
             return {
                 ...state,
                 currentPage: 1

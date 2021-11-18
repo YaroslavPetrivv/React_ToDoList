@@ -1,102 +1,100 @@
 import "./headerToolsStyle.scss"
 import CheckboxTool from "./headerTols/CheckboxTool/CheckboxTool";
-import {useState} from "react";
 import SearchTool from "./headerTols/searchTools/SearchTool";
 import SelectTool from "./headerTols/SelectTool/SelectTool";
-import {useDispatch} from "react-redux";
+import {useCallback, useState} from "react";
 import {
     changeByPrice,
-    changeByStatus,
-    changeByType,
-    findByCompany,
-    findByContact,
-    findBySuy, resetCurrentPage, setActiveCheckBox
+    changeByStatus, changeByType,
+    findByCompany, findByContact,
+    findBySuy, resetCurrentPage,
+    setActiveCheckBox
 } from "../../reducers/actionCreators/fileActionCreators";
-import {RESET_CURRENT_PAGE} from "../../reducers/actionTypes";
+import {useDispatch} from "react-redux";
 
 export default function HeaderTools() {
+    const [filter, setFilter] = useState({
+        stateCheckbox: false,
+        searchCompany: '',
+        selectStatus: 'All',
+        selectType: 'All',
+        searchSku: '',
+        searchContact: '',
+        selectPrice: 'All'
+    })
+
 
     const dispatch = useDispatch();
 
-    const [stateCheckbox, setStateCheckbox] = useState(false);
+    const handleSearchCompany = useCallback((e) => {
+        setFilter({...filter, searchCompany: e.target.value})
+    }, [filter]);
 
-    const [stateSearchCompany, setStateSearchCompany] = useState('');
-
-    const [stateSelectStatus, setStateSelectStatus] = useState('All');
-
-    const [stateSelectType, setStateSelectType] = useState('All');
-
-    const [stateSearchSku, setStateSearchSku] = useState('');
-
-    const [stateSearchContact, setStateSearchContact] = useState('');
-
-    const [stateSelectPrice, setStateSelectPrice] = useState('All');
+    const handleCheckbox = useCallback((e) => {
+        setFilter({...filter, stateCheckbox: e.target.checked});
+    }, [filter])
 
 
-    const handleSearchCompany = (e) => {
-        setStateSearchCompany(e.target.value);
-    }
-    dispatch(findByCompany(stateSearchCompany));
+    const handleSelectSku = useCallback((e) => {
+        setFilter({...filter, searchSku: e.target.value})
+    }, [filter])
 
 
-    const handleCheckbox = (e) => {
-        setStateCheckbox(e.target.checked);
-    }
-        dispatch(setActiveCheckBox(stateCheckbox));
+    const handleSelectStatus = useCallback((e) => {
+        setFilter({...filter, selectStatus: e.target.value});
+    }, [filter]);
 
 
-    const handleSelectSku = (e) => {
-        setStateSearchSku(e.target.value);
-    }
-    dispatch(findBySuy(stateSearchSku));
+    const handleSelectStatusButton = useCallback((value) => {
+        setFilter({...filter, selectStatus: value})
+    }, [filter])
 
 
-    const handleSelectStatus = (e) => {
-        setStateSelectStatus(e.target.value);
-    }
-    const handleSelectStatusButton = (value) => {
-        setStateSelectStatus(value);
-    }
-    dispatch(changeByStatus(stateSelectStatus));
+    const handleSelectType = useCallback((e) => {
+        setFilter({...filter, selectType: e.target.value});
+    }, [filter])
 
 
-    const handleSelectType = (e) => {
-        setStateSelectType(e.target.value);
-    }
-    const handleSelectTypeButton = (value) => {
-        setStateSelectType(value);
-    }
-    dispatch(changeByType(stateSelectType));
+    const handleSelectTypeButton = useCallback((value) => {
+        setFilter({...filter, selectType: value});
+    }, [filter])
 
 
-    const handleSelectContact = (e) => {
-        setStateSearchContact(e.target.value);
-    }
-    dispatch(findByContact(stateSearchContact));
+    const handleSelectContact = useCallback((e) => {
+        setFilter({...filter, searchContact: e.target.value});
+    }, [filter])
 
 
-    const handleSelectPrice = (e) => {
-        setStateSelectPrice(e.target.value);
-    }
-    const handleSelectPriceButton = (value) => {
-        setStateSelectPrice(value);
-    }
-    dispatch(changeByPrice(stateSelectPrice));
+    const handleSelectPrice = useCallback((e) => {
+        setFilter({...filter, selectPrice: e.target.value});
+    }, [filter])
+
+    const handleSelectPriceButton = useCallback((value) => {
+        setFilter({...filter, selectPrice: value});
+    }, [filter])
+
+    dispatch(changeByStatus(filter.selectStatus));
+    dispatch(findByCompany(filter.searchCompany));
+    dispatch(setActiveCheckBox(filter.stateCheckbox));
+    dispatch(findBySuy(filter.searchSku));
+    dispatch(changeByType(filter.selectType));
+    dispatch(findByContact(filter.searchContact));
+    dispatch(changeByPrice(filter.selectPrice));
     dispatch(resetCurrentPage());
 
     return (
         <div className="headerTools">
-            <CheckboxTool stateCheckbox={stateCheckbox} handleCheckbox={handleCheckbox}/>
-            <SearchTool stateSearch={stateSearchCompany} handleInput={handleSearchCompany} fieldName="Company"/>
-            <SelectTool stateSelect={stateSelectStatus} handleSelectStatusButton={handleSelectStatusButton}
+            <CheckboxTool stateCheckbox={filter.stateCheckbox} handleCheckbox={handleCheckbox}/>
+            <SearchTool stateSearch={filter.searchCompany} handleInput={handleSearchCompany} fieldName="Company"/>
+            <SelectTool stateSelect={filter.selectStatus} handleSelectStatusButton={handleSelectStatusButton}
                         handleSelect={handleSelectStatus} fieldName="Status"
                         status={['All', 'Active', 'Danger', 'Pending']}/>
-            <SelectTool stateSelect={stateSelectType} handleSelectStatusButton={handleSelectTypeButton}
+            <SelectTool stateSelect={filter.selectType} handleSelectStatusButton={handleSelectTypeButton}
                         handleSelect={handleSelectType} fieldName="Type"
                         status={['All', 'Bravo', 'Gold', 'Alfa']}/>
-            <SearchTool stateSearch={stateSearchSku} handleInput={handleSelectSku} fieldName="SKU"/>
-            <SearchTool stateSearch={stateSearchContact} handleInput={handleSelectContact} fieldName="Contact"/>
-            <SelectTool stateSelect={stateSelectPrice} handleSelectStatusButton={handleSelectPriceButton}
+            <SearchTool stateSearch={filter.searchSku} handleInput={handleSelectSku} fieldName="SKU"/>
+            <SearchTool stateSearch={filter.searchCompany} handleInput={handleSelectContact} fieldName="Contact"/>
+            <SelectTool stateSelect={filter.selectPrice} handleSelectStatusButton={handleSelectPriceButton}
                         handleSelect={handleSelectPrice} fieldName="Price USD"
                         status={['All', 'cheap', 'dear']}/>
             <p className="headerTools__name">Action</p>
